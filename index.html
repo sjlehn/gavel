@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Virtual Gavel</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        cursor: none;
+      }
+      #hammer {
+        position: fixed;
+        width: 400px;
+        height: 400px;
+        background: url("gavel.png") no-repeat center;
+        background-size: contain;
+        pointer-events: none;
+        transform: rotate(0deg);
+        transition: transform 0.2s;
+        transform-origin: 100% right;
+        z-index: 100;
+      }
+      #hammer.clicked {
+        transform: rotate(-20deg);
+      }
+      body { 
+        background: url("table.jpg") repeat center;
+      }
+    </style>
+  </head>
+  <body onclick="strikeGavel()">
+    <div id="hammer"></div>
+    <script>
+      function strikeGavel() {
+        const audio = new Audio("gavel-sound.m4a");
+        audio.play();
+      }
+      document.addEventListener("click", function (e) {
+        hammer.classList.add("clicked");
+
+        setTimeout(function () {
+          hammer.classList.remove("clicked");
+        }, 200);
+      });
+      document.addEventListener("mousemove", function (e) {
+        const hammer = document.getElementById("hammer");
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+
+        hammer.style.left = mouseX + "px";
+        hammer.style.top = mouseY + "px";
+      });
+    </script>
+  </body>
+</html>
